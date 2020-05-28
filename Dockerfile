@@ -14,7 +14,4 @@ WORKDIR /app
 RUN pip3 install -r dependencies/libs.txt
 
 # Start the python app
-# CMD ["python3", "./telegram_bot.py", "--token=1093817923:AAErY-D5Rgdf8vu46pvfVITSBfnK3X7dFDY", "--chat=-1001190253610"]
-
-# CMD ["python3", "./telegram_bot.py", "--token=" + $token, "--chat=" + $chat]
 CMD python3 ./telegram_bot.py --token=${token} --chat=${chat}
