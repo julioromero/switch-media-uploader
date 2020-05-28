@@ -20,6 +20,8 @@ req = Request()
 
 @route('/postImage', method='POST')
 def postImage():
+    print("BOT_TOKEN " + BOT_TOKEN)
+    print("CHAT_ID " + CHAT_ID)
     bot = Bot(BOT_TOKEN, request=req)
 
     if 'filename' not in request.params:
