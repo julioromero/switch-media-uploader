@@ -9,6 +9,6 @@ Run below command in root directory to install dependencies:
 
 # Running service
 
-python3 ./telegram_chat.py -t BOT_TOKEN -c TELEGRAM_CHAT_ID
+python3 ./telegram_bot.py -t BOT_TOKEN -c TELEGRAM_CHAT_ID
 
 

@@ -25,7 +25,6 @@ def index():
     if 'filename' not in request.params:
         raise HTTPError(400, 'filename param is missing')
     filename = os.path.basename(request.params['filename'])
-
     with TemporaryDirectory() as d:
         fpath = os.path.join(d, filename)
         with open(fpath, 'wb') as f:
