@@ -1,20 +1,22 @@
+variable "gke_username" {
+  default     = ""
+  description = "gke username"
+}
+
+variable "gke_password" {
+  default     = ""
+  description = "gke password"
+}
+
+variable "gke_num_nodes" {
+  default     = 1
+  description = "number of gke nodes"
+}
+
 variable "project_id" {
-  type        = string
-  description = "GCP Project ID"
+    description = "project id"
 }
 
-variable "gcp_region_1" {
-  type        = string
-  description = "GCP Region"
-}
-
-# define GCP zone
-variable "gcp_zone_1" {
-  type        = string
-  description = "GCP Zone"
-}
-
-variable "app_name" {
-  type        = string
-  description = "Application Name"
+variable "region" {
+    description = "region"
 }
