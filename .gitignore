@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 env.list
-.terraform/
 terraform/.terraform/
+terraform/secret-vars.tfvars
+terraform/terraform.tfstate
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
