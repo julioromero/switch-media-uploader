@@ -10,7 +10,9 @@ pipeline {
         stage('Setup') {
          steps {
             sh 'docker version'
-            sh 'docker system prune'
+            sh 'docker system df'
+            sh 'docker system prune -a -f'
+            sh 'docker system df'
          }
         }
         stage('Create and Push New Image') {
