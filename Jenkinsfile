@@ -2,9 +2,11 @@ pipeline {
    agent any
    stages {
         // stage('SonarQube analysis') {
-        //     def scannerHome = tool 'SonarScanner 4.0';
-        //     withSonarQubeEnv() {
-        //         sh "${scannerHome}/bin/sonar-scanner"
+        //     steps {
+        //         withSonarQubeEnv(credentialsId: 'ebea7a45-495c-4751-8a71-616ace7593fc') {
+        //             // def scannerHome = tool 'SonarScanner 4.0';
+        //             sh "/bin/sonar-scanner"
+        //         }
         //     }
         // }    
         stage('Setup') {
@@ -13,6 +15,11 @@ pipeline {
             sh 'docker system df'
             sh 'docker system prune -a -f'
             sh 'docker system df'
+         }
+        }
+        stage('Unit Tests') {
+         steps {
+            sh 'python3 ./telegram_unit_test.py'
          }
         }
         stage('Create and Push New Image') {
@@ -29,11 +36,9 @@ pipeline {
         stage('Deploy to cluster') {
             steps {
                 echo 'Login to cluster'
-                sh 'PATH=/google-cloud-sdk/bin:$PATH'
-                sh 'gcloud container clusters get-credentials switch-uploader-cluster --zone us-east1-b --project vaulted-valor-278105'
+                sh '/google-cloud-sdk/bin/gcloud container clusters get-credentials switch-uploader-cluster --zone us-east1-b --project vaulted-valor-278105'
                 echo 'Deploy to cluster'
-                //docker commands not working in dockerized jenkins, using  google container registry instead 
-                sh 'kubectl set image deployment/switch-uploader-deployment switch-uploader=luloromero19/switch-uploader:v0.${BUILD_NUMBER} --namespace development' 
+                sh '/google-cloud-sdk/bin/kubectl set image deployment/switch-uploader-deployment switch-uploader=luloromero19/switch-uploader:v0.${BUILD_NUMBER} --namespace development' 
                 // sh 'kubectl set image deployment/switch-uploader-deployment switch-uploader=gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER} --namespace development'
             }
         }
