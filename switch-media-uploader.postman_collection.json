@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "45b911b4-85b1-4f42-b50b-7aa3cd92b061",
+		"name": "switch-media-uploader",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "telegrambot-postImage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c38f8e0-8423-427d-93e9-e18166c3f020",
+						"exec": [
+							"pm.test(\"Response body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/testFiles/Untitled.jpg"
+					},
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://34.74.159.139/postImage?filename=2020041116504000-02CB906EA538A35643C1E1484C4B947D.jpg",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"159",
+						"139"
+					],
+					"path": [
+						"postImage"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "2020041116504000-02CB906EA538A35643C1E1484C4B947D.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "telegrambot-postVideo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48b79712-4d80-4421-bed0-c40eb67ff478",
+						"exec": [
+							"pm.test(\"Response body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/testFiles/video.mp4"
+					},
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://34.74.159.139/postVideo?filename=2020041116504000-02CB906EA538A35643C1E1484C4B947D.mp4",
+					"protocol": "http",
+					"host": [
+						"34",
+						"74",
+						"159",
+						"139"
+					],
+					"path": [
+						"postVideo"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "2020041116504000-02CB906EA538A35643C1E1484C4B947D.mp4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
