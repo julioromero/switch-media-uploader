@@ -11,7 +11,7 @@ pipeline {
          steps {
             sh 'echo Creating new image for build: ${BUILD_NUMBER}'
             //docker commands not working in dockerized jenkins, using  google container registry instead
-            sh 'sudo docker push luloromero19/switch-uploader:v0.${BUILD_NUMBER}'
+            sh 'docker push luloromero19/switch-uploader:v0.${BUILD_NUMBER}'
             // sh 'gcloud builds submit . -t gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER}'
          }
         }
