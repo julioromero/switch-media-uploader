@@ -1,12 +1,12 @@
 pipeline {
    agent any
    stages {
-        stage('SonarQube analysis') {
-            def scannerHome = tool 'SonarScanner 4.0';
-            withSonarQubeEnv() {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
-        }
+        // stage('SonarQube analysis') {
+        //     def scannerHome = tool 'SonarScanner 4.0';
+        //     withSonarQubeEnv() {
+        //         sh "${scannerHome}/bin/sonar-scanner"
+        //     }
+        // }
         stage('Create New Image') {
          steps {
             sh 'echo Creating new image for build: ${BUILD_NUMBER}'
