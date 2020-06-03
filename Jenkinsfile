@@ -10,6 +10,7 @@ pipeline {
         stage('Setup') {
          steps {
             sh 'docker version'
+            sh 'docker system prune'
          }
         }
         stage('Create and Push New Image') {
