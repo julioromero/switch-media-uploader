@@ -1,4 +1,4 @@
-pipeline {
+pipeline { 
    agent any
    stages {
         // stage('SonarQube analysis') {
@@ -10,7 +10,6 @@ pipeline {
         stage('Setup') {
          steps {
             sh 'docker version'
-            sh 'PATH=/google-cloud-sdk/bin:$PATH'
          }
         }
         stage('Create and Push New Image') {
@@ -27,6 +26,7 @@ pipeline {
         stage('Deploy to cluster') {
             steps {
                 echo 'Login to cluster'
+                sh 'PATH=/google-cloud-sdk/bin:$PATH'
                 sh 'gcloud container clusters get-credentials switch-uploader-cluster --zone us-east1-b --project vaulted-valor-278105'
                 echo 'Deploy to cluster'
                 //docker commands not working in dockerized jenkins, using  google container registry instead 
