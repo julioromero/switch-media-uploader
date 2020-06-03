@@ -6,14 +6,22 @@ pipeline {
         //     withSonarQubeEnv() {
         //         sh "${scannerHome}/bin/sonar-scanner"
         //     }
-        // }
-        stage('Create New Image') {
+        // }    
+        stage('Setup') {
          steps {
-            sh 'echo Creating new image for build: ${BUILD_NUMBER}'
-            //docker commands not working in dockerized jenkins, using  google container registry instead
-            sh 'docker build -t switch-uploader:v0.${BUILD_NUMBER} .'
-            sh 'docker push luloromero19/switch-uploader:v0.${BUILD_NUMBER}'
-            // sh 'gcloud builds submit . -t gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER}'
+            sh 'docker version'
+            sh 'PATH=/google-cloud-sdk/bin:$PATH'
+         }
+        }
+        stage('Create and Push New Image') {
+         steps {
+            withCredentials([string(credentialsId: 'docker_pw', variable: 'docker_pw')]) {
+                sh 'echo docker pw $docker_pw'
+                sh 'docker login -u luloromero19 -p $docker_pw'
+                sh 'docker build -t luloromero19/switch-uploader:v0.${BUILD_NUMBER} .'
+                sh 'docker push luloromero19/switch-uploader:v0.${BUILD_NUMBER}'
+                // sh 'gcloud builds submit . -t gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER}'
+            }
          }
         }
         stage('Deploy to cluster') {
@@ -23,7 +31,6 @@ pipeline {
                 echo 'Deploy to cluster'
                 //docker commands not working in dockerized jenkins, using  google container registry instead 
                 sh 'kubectl set image deployment/switch-uploader-deployment switch-uploader=luloromero19/switch-uploader:v0.${BUILD_NUMBER} --namespace development' 
-                //kubectl set image deployment/switch-uploader-deployment switch-uploader=luloromero19/switch-uploader:v0.01 --namespace development
                 // sh 'kubectl set image deployment/switch-uploader-deployment switch-uploader=gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER} --namespace development'
             }
         }
