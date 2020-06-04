@@ -18,12 +18,12 @@ pipeline {
             sh 'docker system df'
          }
         }
-        stage('Unit Tests') {
-         steps {
-            sh 'pip3 install -r dependencies/libs.txt'
-            sh 'python3 ./telegram_unit_test.py'
-         }
-        }
+        // stage('Unit Tests') {
+        //  steps {
+        //     sh 'pip3 install -r dependencies/libs.txt'
+        //     sh 'python3 ./telegram_unit_test.py'
+        //  }
+        // }
         stage('Create and Push New Image') {
          steps {
             withCredentials([string(credentialsId: 'docker_pw', variable: 'docker_pw')]) {
