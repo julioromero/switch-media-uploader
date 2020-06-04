@@ -11,6 +11,7 @@ pipeline {
         // }    
         stage('Setup') {
          steps {
+            sh 'ls -ltr'
             sh 'docker version'
             sh 'docker system df'
             sh 'docker system prune -a -f'
@@ -19,6 +20,7 @@ pipeline {
         }
         stage('Unit Tests') {
          steps {
+            sh 'pip3 install -r dependencies/libs.txt'
             sh 'python3 ./telegram_unit_test.py'
          }
         }
@@ -40,6 +42,12 @@ pipeline {
                 echo 'Deploy to cluster'
                 sh '/google-cloud-sdk/bin/kubectl set image deployment/switch-uploader-deployment switch-uploader=luloromero19/switch-uploader:v0.${BUILD_NUMBER} --namespace development' 
                 // sh 'kubectl set image deployment/switch-uploader-deployment switch-uploader=gcr.io/vaulted-valor-278105/switch-uploader:v0.${BUILD_NUMBER} --namespace development'
+            }
+        }
+
+        stage('Run API tests - newman') {
+            steps {
+                sh 'docker run -v ./:/etc/newman -t postman/newman:alpine run switch-media-uploader.postman_collection.json' 
             }
         }
    }

@@ -13,5 +13,8 @@ WORKDIR /app
 # Install dependencies.
 RUN pip3 install -r dependencies/libs.txt
 
+# Run unit tests
+RUN python3 ./telegram_unit_test.py
+
 # Start the python app
 CMD python3 ./telegram_bot.py --token=${token} --chat=${chat}
