@@ -11,6 +11,7 @@ pipeline {
         // }    
         stage('Setup') {
          steps {
+            sh 'pwd'
             sh 'ls -ltr'
             sh 'docker version'
             sh 'docker system df'
@@ -47,7 +48,7 @@ pipeline {
 
         stage('Run API tests - newman') {
             steps {
-                sh 'docker run -v .:/etc/newman -t postman/newman:alpine run switch-media-uploader.postman_collection.json' 
+                sh 'docker run -v ~/project/switch-media-uploader/testFiles:/etc/newman -t postman/newman:alpine run switch-media-uploader.postman_collection.json' 
             }
         }
    }
