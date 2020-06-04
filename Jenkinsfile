@@ -47,7 +47,7 @@ pipeline {
 
         stage('Run API tests - newman') {
             steps {
-                sh 'docker run -v ./:/etc/newman -t postman/newman:alpine run switch-media-uploader.postman_collection.json' 
+                sh 'docker run -v .:/etc/newman -t postman/newman:alpine run switch-media-uploader.postman_collection.json' 
             }
         }
    }
