@@ -11,6 +11,7 @@ COPY . /app/
 WORKDIR /app
 
 # Install dependencies.
+RUN export TMPDIR='/var/tmp'
 RUN pip3 install -r dependencies/libs.txt
 
 # Run unit tests
