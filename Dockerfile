@@ -11,8 +11,8 @@ COPY . /app/
 WORKDIR /app
 
 # Install dependencies.
-RUN pwd
-RUN export TMPDIR='$HOME/tmp'
+# RUN pwd
+RUN export TMPDIR='/app/tmp'
 RUN pip3 install -r dependencies/libs.txt
 
 # Run unit tests

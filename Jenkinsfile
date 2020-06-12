@@ -1,12 +1,12 @@
 pipeline { 
    agent any
    stages {
-        stage('SonarQube analysis') {
-            steps {
-                sh "/sonar-scanner-4.3.0.2102-linux/bin/sonar-scanner --version"
-                sh "/sonar-scanner-4.3.0.2102-linux/bin/sonar-scanner -Dsonar.projectKey=switch-uploader -Dsonar.sources=. -Dsonar.host.url=http://35.192.8.193:9000 -Dsonar.login=c0f1253b6f128181f186e6727742fec76e6d92a5"
-            }
-        }
+        // stage('SonarQube analysis') {
+        //     steps {
+        //         sh "/sonar-scanner-4.3.0.2102-linux/bin/sonar-scanner --version"
+        //         sh "/sonar-scanner-4.3.0.2102-linux/bin/sonar-scanner -Dsonar.projectKey=switch-uploader -Dsonar.sources=. -Dsonar.host.url=http://35.192.8.193:9000 -Dsonar.login=c0f1253b6f128181f186e6727742fec76e6d92a5"
+        //     }
+        // }
         stage('Setup') {
          steps {
             sh 'pwd'
