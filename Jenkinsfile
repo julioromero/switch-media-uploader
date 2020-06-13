@@ -9,6 +9,14 @@ pipeline {
             sh 'docker system df'
          }
         }
+        // UNIT tests are now part of dockerfile
+        // stage('Unit Tests') {
+        //  steps {
+        //     sh 'pip3 install -r dependencies/libs.txt'
+        //     sh 'python3 ./telegram_unit_test.py'
+        //  }
+        // }
+
         stage('SonarQube analysis') {
             steps {
                 sh "/sonar-scanner-4.3.0.2102-linux/bin/sonar-scanner --version"
