@@ -1,18 +1,17 @@
-import bottle
+from mock import patch
+import telegram_bot
 import unittest
-from boddle import boddle
 
 
 class TestIt1(unittest.TestCase):
 
-    def testPostImageNoParams(self):
-        with boddle(path='/postImage'):
-            self.assertRaises(bottle.HTTPError)
+    @patch('telegram_bot.postImage')
+    def testPostImage(self, MockSomeClass):
+        self.assertIs(telegram_bot.postImage, MockSomeClass)
 
-    def testPostImage(self):
-        with boddle(path='/postImage'):
-            with boddle(method='post', params={'filename': 'test.jpg'}):
-                self.assertEqual(bottle.request.params['filename'], 'test.jpg')
+    @patch('telegram_bot.postVideo')
+    def testPostVideo(self, MockSomeClass):
+        self.assertIs(telegram_bot.postVideo, MockSomeClass)
 
 
 if __name__ == '__main__':
