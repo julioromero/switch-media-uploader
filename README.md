@@ -1,4 +1,4 @@
-# switch-media-uploader testing
+# switch-media-uploader new
 microservice that receives POST requests containing images/video and send to telegram bot
 
 # Installing dependencies
